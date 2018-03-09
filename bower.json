@@ -1,23 +1,24 @@
 {
-  "name": "bootstrap-4-stylus",
+  "name": "stylus-pure-mixins",
   "version": "1.0.1",
   "authors": [
-    "ben eaves"
+    "ben eaves",
+    "jim hessin"
   ],
-  "description": "stylus port of bootstrap.css v4.0.0-beta",
-  "main": "bootstrap.styl",
+  "description": "pure mixin stylus port of bootstrap.css v4.0.0-beta",
+  "main": "index.styl",
   "keywords": [
     "stylus",
     "bootstrap",
-	"bootstrap-4",
+    "bootstrap-4",
     "port",
     "stylus-bootstrap",
     "bootstrap-stylus"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/angeal185/bootstrap-4-stylus",
+  "homepage": "https://github.com/jhessin/stylus-pure-mixins",
   "repository": {
     "type": "git",
-    "url": "git://github.com/angeal185/bootstrap-4-stylus.git"
+    "url": "git://github.com/jhessin/stylus-pure-mixins.git"
   }
 }
