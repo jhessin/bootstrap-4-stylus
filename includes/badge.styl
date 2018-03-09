@@ -1,95 +1,93 @@
-.badge
-    display inline-block
-    padding 0.25em 0.4em
-    font-size 75%
-    font-weight --font-weight-bold
-    line-height 1
-    color --white
-    text-align center
-    white-space nowrap
-    vertical-align baseline
-    border-radius 0.25rem
-    &:empty
-        display none
+badge(--types)
+  display inline-block
+  padding 0.25em 0.4em
+  font-size 75%
+  font-weight --font-weight-bold
+  line-height 1
+  color --white
+  text-align center
+  white-space nowrap
+  vertical-align baseline
+  border-radius 0.25rem
+  &:empty
+    display none
+  if 'btn' in --types
+    position relative
+    top -1px
 
-.btn
-    .badge
-        position relative
-        top -1px
-
-.badge-pill
+  if 'pill' in --types
     padding-right 0.6em
     padding-left 0.6em
     border-radius 10rem
 
-.badge-primary
+  if 'primary' in --types
     color --white
     background-color --primary
+    &[href]:focus
+    &[href]:hover
+      color --white
+      text-decoration none
+      background-color --primaryHov
 
-.badge-primary[href]:focus, .badge-primary[href]:hover
-    color --white
-    text-decoration none
-    background-color --primaryHov
-
-.badge-secondary
+  if 'secondary' in --types
     color --white
     background-color --secondary
+    &[href]:focus
+    &[href]:hover
+      color --white
+      text-decoration none
+      background-color --secondaryHov
 
-.badge-secondary[href]:focus, .badge-secondary[href]:hover
-    color --white
-    text-decoration none
-    background-color --secondaryHov
-
-.badge-success
+  if 'success' in --types
     color --white
     background-color --success
+    &[href]:focus
+    &[href]:hover
+      color --white
+      text-decoration none
+      background-color --successHov
 
-.badge-success[href]:focus, .badge-success[href]:hover
-    color --white
-    text-decoration none
-    background-color --successHov
-
-.badge-info
+  if 'info' in --types
     color --white
     background-color --info
+    &[href]:focus
+    &[href]:hover
+      color --white
+      text-decoration none
+      background-color --infoHov
 
-.badge-info[href]:focus, .badge-info[href]:hover
-    color --white
-    text-decoration none
-    background-color --infoHov
-
-.badge-warning
+  if 'warning' in --types
     color #111
     background-color --warning
+    &[href]:focus
+    &[href]:hover
+      color #111
+      text-decoration none
+      background-color --warningHov
 
-.badge-warning[href]:focus, .badge-warning[href]:hover
-    color #111
-    text-decoration none
-    background-color --warningHov
-
-.badge-danger
+  if 'danger' in --types
     color --white
     background-color --danger
+    &[href]:focus
+    &[href]:hover
+      color --white
+      text-decoration none
+      background-color --dangerHov
 
-.badge-danger[href]:focus, .badge-danger[href]:hover
-    color --white
-    text-decoration none
-    background-color --dangerHov
-
-.badge-light
+  if 'light' in --types
     color #111
     background-color --light
+    &[href]:focus
+    &[href]:hover
+      color #111
+      text-decoration none
+      background-color --lightHov
 
-.badge-light[href]:focus, .badge-light[href]:hover
-    color #111
-    text-decoration none
-    background-color --lightHov
-
-.badge-dark
+  if 'dark' in --types
     color --white
     background-color --dark
-
-.badge-dark[href]:focus, .badge-dark[href]:hover
-    color --white
-    text-decoration none
-    background-color --darkHov
+    &[href]:focus
+    &[href]:hover
+      color --white
+      text-decoration none
+      background-color --darkHov

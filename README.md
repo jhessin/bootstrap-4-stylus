@@ -39,6 +39,15 @@ To minimize and standardize the number of classes used inside mixins for functio
 
 Classes like `.close` and `.active` will remain as is (unless overwritten as parameters of the mixin) as these are clear and concise. Clases like `.tab-pane`, `.alert-link`, and `.card-link` will be shortened to simply `.pane` or `.link` for conciseness these too can be overwritten as parameters (more explaination to follow).
 
+For hyphenated abreviations such as `.badge-primary` etc. I took a different track. I added a list parameter to the `badge()` mixin so you can write `badge(pill primary)` to get a primary colored pill badge.
+So far this is the case for:
+
+* badge(--types: list) -- accepts (btn, pill, primary, secondary...)
+* align-self(--type), align-content() -- accepts every standard align-self/align-content parameter.
+* align(--type) -- accepts (baseline, top, middle, bottom, text-bottom, text-top) all this realy does is same a bit of typing (vertical and !important).
+* alert(--types: list, --close: class, --link: class)
+
+** note I removed alert-dismissable as all it did was allow you to add a class to an alert and hide it (something you should be able to do anyway).
 ### Variables
 
 Build variables can be overwritten before importing into your .styl file.
