@@ -17,9 +17,21 @@ yarn add stylus-pure-mixins
 
 A complete, fully functional convert of bootstrap.css to stylus. Using nothing but pure mixins for those of us who actually like writing stylus instead of just importing it and forgetting it.
 
+## Progress
+
+Currently I have just started converting everything over to mixins. It may take some time I'm starting at the top and working my way down.
+
 ## Instructions
 
-bootstrap.css has been converted, broken down into smaller .styl includes and the include files are named accordingly. Each class should be replaced with a mixin. This allows you to build custom classes in your .styl files and keep your html class lists to a flat minimum.
+bootstrap.css has been converted, broken down into smaller .styl includes and the include files are named accordingly. Each class should be replaced with a mixin. This allows you to build custom classes in your .styl files and keep your html class lists to a flat minimum. This is useful for a flat map of styles.
+
+```stylus
+.my-app-tabs
+  tabs()
+
+.my-app-button
+  button()
+```
 
 Build variables can be overwritten before importing into your .styl file.
 
