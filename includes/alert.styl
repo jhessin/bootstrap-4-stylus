@@ -1,91 +1,92 @@
-.alert
+alert()
     padding 0.75rem 1.25rem
     margin-bottom 1rem
     border 1px solid transparent
     border-radius 0.25rem
 
-.alert-heading
+alert-heading()
     color inherit
 
-.alert-link
+alert-link()
     font-weight --font-weight-bold
 
-.alert-dismissible
-    .close
+alert-dismissible(--close = ".close")
+    alert()
+    {--close}
         position relative
         top -0.75rem
         right -1.25rem
         padding 0.75rem 1.25rem
         color inherit
 
-.alert-primary
+alert-primary(--link = ".link")
     color #004085
     background-color #cce5ff
     border-color #b8daff
     hr
         border-top-color #9fcdff
-    .alert-link
+    {--link}
         color #002752
 
-.alert-secondary
+alert-secondary(--link = '.link')
     color #464a4e
     background-color #e7e8ea
     border-color #dddfe2
     hr
         border-top-color #cfd2d6
-    .alert-link
+    {--link}
         color #2e3133
 
-.alert-success
+alert-success(--link = '.link')
     color #155724
     background-color #d4edda
     border-color #c3e6cb
     hr
         border-top-color #b1dfbb
-    .alert-link
+    {--link}
         color #0b2e13
 
-.alert-info
+alert-info(--link = '.link')
     color #0c5460
     background-color #d1ecf1
     border-color #bee5eb
     hr
         border-top-color #abdde5
-    .alert-link
+    {--link}
         color #062c33
 
-.alert-warning
+alert-warning(--link = '.link')
     color #856404
     background-color #fff3cd
     border-color #ffeeba
     hr
         border-top-color #ffe8a1
-    .alert-link
+    {--link}
         color #533f03
 
-.alert-danger
+alert-danger(--link = '.link')
     color #721c24
     background-color #f8d7da
     border-color #f5c6cb
     hr
         border-top-color #f1b0b7
-    .alert-link
+    {--link}
         color #491217
 
-.alert-light
+alert-light(--link = '.link')
     color #818182
     background-color #fefefe
     border-color #fdfdfe
     hr
         border-top-color #ececf6
-    .alert-link
+    {--link}
         color #686868
 
-.alert-dark
+alert-dark(--link = '.link')
     color #1b1e21
     background-color #d6d8d9
     border-color #c6c8ca
     hr
         border-top-color #b9bbbe
-    .alert-link
+    {--link}
         color #040505

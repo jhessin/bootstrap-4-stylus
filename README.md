@@ -27,11 +27,19 @@ bootstrap.css has been converted, broken down into smaller .styl includes and th
 
 ```stylus
 .my-app-tabs
-  tabs()
+  nav-tabs()
 
 .my-app-button
-  button()
+  btn()
 ```
+
+### Conventions
+
+To minimize and standardize the number of classes used inside mixins for functionality I am adopting the following conventions:
+
+Classes like `.close` and `.active` will remain as is (unless overwritten as parameters of the mixin) as these are clear and concise. Clases like `.tab-pane`, `.alert-link`, and `.card-link` will be shortened to simply `.pane` or `.link` for conciseness these too can be overwritten as parameters (more explaination to follow).
+
+### Variables
 
 Build variables can be overwritten before importing into your .styl file.
 
