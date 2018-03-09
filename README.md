@@ -43,7 +43,7 @@ For hyphenated abreviations such as `.badge-primary` etc. I took a different tra
 So far this is the case for:
 
 * badge(--types: list) -- accepts (btn, pill, primary, secondary...)
-* align-self(--type), align-content() -- accepts every standard align-self/align-content parameter.
+* align-self(--type), align-content(), and all sized variants align-self-sm(...) -- accepts every standard align-self/align-content parameter.
 * align(--type) -- accepts (baseline, top, middle, bottom, text-bottom, text-top) all this realy does is same a bit of typing (vertical and !important).
 * alert(--types: list, --close: class, --link: class)
 * bg(--type: either a defined color or valid rgba, --hover: (optional) rgba for hover and active links)

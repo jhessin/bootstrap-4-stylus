@@ -1,7 +1,7 @@
 align-content(--type)
   -ms-flex-line-pack replace('flex-', '', --type) !important
   if --type is 'start' or --type is 'end'
-    align-content flex-{--type} !important
+    align-content convert(s('flex--%s', --type)) !important
   else
     align-content --type !important
 
