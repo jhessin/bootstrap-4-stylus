@@ -1,35 +1,12 @@
 
-bg(--back = white, --fore = black, --hover = null)
-  if --back is a 'string'
-    --back = unquote(--back)
-  if --fore is a 'string'
-    --fore = unquote(--fore)
-  if --hover is a 'string'
-    --hover = unquote(--hover)
-  if --fore is a 'rgba'
-    color: --fore
-    a
-      color: --fore
-  else if --fore is 'white'
-    color: --white
-    a
-      color: --white
-  else
-    color: convert(s('--%s', --fore))
-    a
-      color: convert(s('--%s', --fore))
+bg(--back = --bodyBackground, --fore = --back is a 'rgba' ? invert(--back) : --bodyColor, --hover = dark(--fore)? lighten(--fore, 50%): darken(--fore, 50%))
   if --back is a 'rgba'
     background-color: --back
-  else if --back is 'white'
-    background-color: --white !important
-  else if --back is 'transparent'
-    background-color: transparent !important
-  else
-    background-color convert(s('--%s', --back)) !important
-    a:focus
-    a:hover
-      color convert(s('--%sHov', --back)) !important
-  if --hover is a 'rgba'
-    a:focus
-    a:hover
+  else if --back is a 'call'
+    background: --back
+  color: --fore
+  a
+    color: --fore
+    &:focus
+    &:hover
       color: --hover

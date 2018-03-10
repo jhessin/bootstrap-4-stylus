@@ -28,8 +28,11 @@
 --white := #fff
 --black := #000
 
---bodyColor := #212529
---linkColor := --bodyColor
+--bodyColor := --black
+if light(--bodyColor)
+  --linkColor := shade(--bodyColor, 60%)
+else
+  --linkColor := tint(--bodyColor, 60%)
 --bodyBackground := --white
 
 //grid breakpoints
