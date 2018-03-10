@@ -47,6 +47,7 @@ So far this is the case for:
 * align(--type) -- accepts (baseline, top, middle, bottom, text-bottom, text-top) all this realy does is same a bit of typing (vertical and !important).
 * alert(--types: list, --close: class, --link: class)
 * bg(--type: either a defined color or valid rgba, --hover: (optional) rgba for hover and active links)
+* ** pretty much everything I will let you know more when I'm done **
 
 ** note I removed alert-dismissable as all it did was allow you to add a class to an alert and hide it (something you should be able to do anyway).
 ### Variables
