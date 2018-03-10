@@ -1,19 +1,35 @@
 
-bg(--type = 'white', --hover = null)
-  if typeof(--type) is 'string'
-    --type = unquote(--type)
-  if typeof(--type) is 'rgba'
-    background-color: --type
-  else if --type is 'white'
+bg(--back = white, --fore = black, --hover = null)
+  if --back is a 'string'
+    --back = unquote(--back)
+  if --fore is a 'string'
+    --fore = unquote(--fore)
+  if --hover is a 'string'
+    --hover = unquote(--hover)
+  if --fore is a 'rgba'
+    color: --fore
+    a
+      color: --fore
+  else if --fore is 'white'
+    color: --white
+    a
+      color: --white
+  else
+    color: convert(s('--%s', --fore))
+    a
+      color: convert(s('--%s', --fore))
+  if --back is a 'rgba'
+    background-color: --back
+  else if --back is 'white'
     background-color: --white !important
-  else if --type is 'transparent'
+  else if --back is 'transparent'
     background-color: transparent !important
   else
-    background-color convert(s('--%s', --type)) !important
-    a&:focus
-    a&:hover
-      background-color convert(s('--%sHov', --type)) !important
-  if typeof(--hover) is 'rgba'
-    a&:focus
-    a&:hover
-      background-color: --hover
+    background-color convert(s('--%s', --back)) !important
+    a:focus
+    a:hover
+      color convert(s('--%sHov', --back)) !important
+  if --hover is a 'rgba'
+    a:focus
+    a:hover
+      color: --hover
