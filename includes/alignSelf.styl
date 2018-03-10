@@ -1,22 +1,22 @@
-align-self(--type)
+align-self(--type = center)
   -ms-flex-item-align replace('flex-', '', --type) !important
   if --type is 'start' or --type is 'end'
-    align-self flex-{--type}
+    align-self convert(s('flex--%s', --type)) !important
   else
     align-self --type !important
 
-align-self-sm(--type)
+align-self-sm(--type = center)
   @media (min-width: --grid-sm)
     align-self(--type)
 
-align-self-md(--type)
+align-self-md(--type = center)
   @media (min-width: --grid-md)
     align-self(--type)
 
-align-self-lg(--type)
+align-self-lg(--type = center)
   @media (min-width: --grid-lg)
-    align-self(--type)
+    align-self(--type = center)
 
-align-self-xl(--type)
+align-self-xl(--type = center)
   @media (min-width: --grid-xl)
     align-self(--type)

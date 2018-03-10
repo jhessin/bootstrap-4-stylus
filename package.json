@@ -1,0 +1,9 @@
+{
+  "name": "stylus-pure-mixins",
+  "version": "1.0.0",
+  "description": "Bootstrap 4 as pure mixins.",
+  "main": "index.styl",
+  "repository": "git@github.com:jhessin/stylus-pure-mixins.git",
+  "author": "Jim Hessin <jhessin@gmail.com>",
+  "license": "MIT"
+}

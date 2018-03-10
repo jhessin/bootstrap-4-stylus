@@ -1,5 +1,5 @@
 
-bg(--type, --hover = null)
+bg(--type = 'white', --hover = null)
   if typeof(--type) is 'string'
     --type = unquote(--type)
   if typeof(--type) is 'rgba'
@@ -13,7 +13,7 @@ bg(--type, --hover = null)
     a&:focus
     a&:hover
       background-color convert(s('--%sHov', --type)) !important
-  if typeof(--hover)
+  if typeof(--hover) is 'rgba'
     a&:focus
     a&:hover
       background-color: --hover
