@@ -1,2 +1,9 @@
-align(--type = center)
-  vertical-align --type !important
+// This makes alignment always useful by changing the display type of both this element and it's parent when not dealing with an image.
+
+align(--type = null)
+  unless match('\simg', selector())
+    display: table-cell
+    ../
+      display: table
+  if --type
+    vertical-align: arguments !important

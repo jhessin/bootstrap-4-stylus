@@ -1,9 +1,11 @@
-align-content(--type = center)
+align-content(--type = normal)
+  display: flex
+  flex-wrap: wrap
   -ms-flex-line-pack replace('flex-', '', --type) !important
   if --type is 'start' or --type is 'end'
-    align-content convert(s('flex--%s', --type)) !important
+    align-content convert(s('flex-%s', --type)) !important
   else
-    align-content --type !important
+    align-content arguments !important
 
 align-content-sm(--type = center)
   @media (min-width: --grid-sm)

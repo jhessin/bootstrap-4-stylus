@@ -1,4 +1,4 @@
-alert(--types = null, --close = '.close', --link = '.link')
+alert(--type = null, --close = '.close', --link = '.link')
   padding 0.75rem 1.25rem
   margin-bottom 1rem
   border 1px solid transparent
@@ -11,11 +11,11 @@ alert(--types = null, --close = '.close', --link = '.link')
     right -1.25rem
     padding 0.75rem 1.25rem
     color inherit
-  if 'heading' in --types
+  if --type is 'heading'
     color inherit
 
   // Not sure why these don't use the variable colors.
-  if 'primary' in --types
+  if 'primary' is --type
     color #004085
     background-color #cce5ff
     border-color #b8daff
@@ -23,7 +23,7 @@ alert(--types = null, --close = '.close', --link = '.link')
       border-top-color #9fcdff
     {--link}
       color #002752
-  if 'secondary' in --types
+  if --type is 'secondary'
     color #464a4e
     background-color #e7e8ea
     border-color #dddfe2
@@ -31,7 +31,7 @@ alert(--types = null, --close = '.close', --link = '.link')
       border-top-color #cfd2d6
     {--link}
       color #2e3133
-  if 'success' in --types
+  if --type is 'success'
     color #155724
     background-color #d4edda
     border-color #c3e6cb
@@ -39,7 +39,7 @@ alert(--types = null, --close = '.close', --link = '.link')
       border-top-color #b1dfbb
     {--link}
       color #0b2e13
-  if 'info' in --types
+  if --type is 'info'
     color #0c5460
     background-color #d1ecf1
     border-color #bee5eb
@@ -47,7 +47,7 @@ alert(--types = null, --close = '.close', --link = '.link')
       border-top-color #abdde5
     {--link}
       color #062c33
-  if 'warning' in --types
+  if --type is 'warning'
     color #856404
     background-color #fff3cd
     border-color #ffeeba
@@ -55,7 +55,7 @@ alert(--types = null, --close = '.close', --link = '.link')
       border-top-color #ffe8a1
     {--link}
       color #533f03
-  if 'danger' in --types
+  if --type is 'danger'
     color #721c24
     background-color #f8d7da
     border-color #f5c6cb
@@ -63,7 +63,7 @@ alert(--types = null, --close = '.close', --link = '.link')
       border-top-color #f1b0b7
     {--link}
       color #491217
-  if 'light' in --types
+  if --type is 'light'
     color #818182
     background-color #fefefe
     border-color #fdfdfe
@@ -71,7 +71,7 @@ alert(--types = null, --close = '.close', --link = '.link')
       border-top-color #ececf6
     {--link}
       color #686868
-  if 'dark' in --types
+  if --type is 'dark'
     color #1b1e21
     background-color #d6d8d9
     border-color #c6c8ca
