@@ -1,9 +1,16 @@
-align-items(--type = center)
+// NOTE: this requires passing a string for legacy align-items
+align-items(--type = normal, --grid = false)
+  --type = unquote(--type)
+  if --grid
+    display: grid
+  else
+    display: flex
+  flex-wrap: wrap
   -ms-flex-align replace('flex-', '', --type) !important
   if --type is 'start' or --type is 'end'
-    align-items: convert(s('flex--%s', --type)) !important
+    align-items: convert(s('flex-%s', --type)) !important
   else
-    align-items: --type !important
+    align-items: unquote(arguments) !important
 
 align-items-sm(--type = center)
   @media (min-width: --grid-sm)
