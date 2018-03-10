@@ -1,44 +1,68 @@
-.border
-    border 1px solid #e9ecef !important
+--location-list = top, bottom, right, left, null
+--color-list = primary, secondary, success, info, warning, danger, light, dark, white
+set-border(--location = null, --size = 1px, --type = solid, --color = #e9ecef)
 
-.border-0
-    border 0 !important
+  // start building the result
+  if --location
 
-.border-top-0
-    border-top 0 !important
+    // convert any string
+    if --location is a 'string'
+      --location = convert(--location)
 
-.border-right-0
-    border-right 0 !important
+    if --location in --color-list
+      convert(s('border-color: --%s !important', --location))
+    else if --location in --location-list
+      if --size is 0
+        convert(s('border-%s: %s !important', --location, --size))
+      else
+        convert(s('border-%s: %s %s %s !important', --location, --size, --type, --color))
+  else if --location is 0 // asume they mean size
+    border: 0 !important
+  else
+    border: --size --type --color !important
 
-.border-bottom-0
-    border-bottom 0 !important
 
-.border-left-0
-    border-left 0 !important
+  // set-border()
+  // /*  border 1px solid #e9ecef !important */
 
-.border-primary
-    border-color --primary !important
+  // set-border(0)
+  // /*  border 0 !important */
 
-.border-secondary
-    border-color --secondary !important
+  // set-border(top,0)
+  // /*  border-top 0 !important */
 
-.border-success
-    border-color --success !important
+  // set-border(right,0)
+  // /*  border-right 0 !important */
 
-.border-info
-    border-color --info !important
+  // set-border(bottom,0)
+  // /*  border-bottom 0 !important */
 
-.border-warning
-    border-color --warning !important
+  // set-border(left,0)
+  // /*  border-left 0 !important */
 
-.border-danger
-    border-color --danger !important
+  // set-border(primary)
+  // /*  border-color --primary !important */
 
-.border-light
-    border-color --light !important
+  // set-border(secondary)
+  // /*  border-color --secondary !important */
 
-.border-dark
-    border-color --dark !important
+  // set-border(success)
+  // /*  border-color --success !important */
 
-.border-white
-    border-color --white !important
+  // set-border(info)
+  // /*  border-color --info !important */
+
+  // set-border(warning)
+  // /*  border-color --warning !important */
+
+  // set-border(danger)
+  // /*  border-color --danger !important */
+
+  // set-border(light)
+  // /*  border-color --light !important */
+
+  // set-border(dark)
+  // /*  border-color --dark !important */
+
+  // set-border('white') // note the quotes!
+  // /*  border-color --white !important */
