@@ -18,14 +18,14 @@
     &.active
         .page-link
             z-index 2
-            color --white
-            background-color --primary
-            border-color --primary
+            color $white
+            background-color $primary
+            border-color $primary
     &.disabled
         .page-link
-            color --secondary
+            color $secondary
             pointer-events none
-            background-color --white
+            background-color $white
             border-color #ddd
 
 .page-link
@@ -34,8 +34,8 @@
     padding 0.5rem 0.75rem
     margin-left -1px
     line-height 1.25
-    color --primary
-    background-color --white
+    color $primary
+    background-color $white
     border 1px solid #ddd
 
 .page-link:focus, .page-link:hover

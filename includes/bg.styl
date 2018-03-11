@@ -1,12 +1,12 @@
 
-bg(--back = --bodyBackground, --fore = --back is a 'rgba' ? invert(--back) : --bodyColor, --hover = dark(--fore)? lighten(--fore, 50%): darken(--fore, 50%))
-  if --back is a 'rgba'
-    background-color: --back
-  else if --back is a 'call'
-    background: --back
-  color: --fore
+bg($back = $bodyBackground, $fore = $back is a 'rgba' ? invert($back) : $bodyColor, $hover = dark($fore)? lighten($fore, 50%): darken($fore, 50%))
+  if $back is a 'rgba'
+    background-color: $back
+  else if $back is a 'call'
+    background: $back
+  color: $fore
   a
-    color: --fore
+    color: $fore
     &:focus
     &:hover
-      color: --hover
+      color: $hover

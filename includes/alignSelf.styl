@@ -1,22 +1,32 @@
-align-self(--type = center)
-  -ms-flex-item-align replace('flex-', '', --type) !important
-  if --type is 'start' or --type is 'end'
-    align-self convert(s('flex-%s', --type)) !important
+align(-args = center, $width = null)
+  if $width
+    display: block
+    width: $width
+  if 'top' in -args or 'start' in -args
+    -ms-flex-item-align: flex-start !important
+    align-self: start !important
+  else if 'bottom' in -args or 'end' in -args
+    -ms-flex-item-align: flex-end !important
+    align-self: end !important
+  else if 'center' in -args
+    align-self: center !important
+  if -args is 'start' or -args is 'end'
+    align-self convert(s('flex-%s', -args)) !important
   else
     align-self unquote(arguments) !important
 
-align-self-sm(--type = center)
-  @media (min-width: --grid-sm)
-    align-self(--type)
+align-self-sm(-args = center)
+  @media (min-width: $grid-sm)
+    align(-args)
 
-align-self-md(--type = center)
-  @media (min-width: --grid-md)
-    align-self(--type)
+align-self-md(-args = center)
+  @media (min-width: $grid-md)
+    align(-args)
 
-align-self-lg(--type = center)
-  @media (min-width: --grid-lg)
-    align-self(--type = center)
+align-self-lg(-args = center)
+  @media (min-width: $grid-lg)
+    align(-args = center)
 
-align-self-xl(--type = center)
-  @media (min-width: --grid-xl)
-    align-self(--type)
+align-self-xl(-args = center)
+  @media (min-width: $grid-xl)
+    align(-args)

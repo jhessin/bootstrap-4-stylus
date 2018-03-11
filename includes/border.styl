@@ -1,25 +1,25 @@
---location-list = top, bottom, right, left, null
---color-list = primary, secondary, success, info, warning, danger, light, dark, white
-set-border(--location = null, --size = 1px, --type = solid, --color = #e9ecef)
+$location-list = top, bottom, right, left, null
+$color-list = primary, secondary, success, info, warning, danger, light, dark, white
+set-border($location = null, $size = 1px, $type = solid, $color = #e9ecef)
 
   // start building the result
-  if --location
+  if $location
 
     // convert any string
-    if --location is a 'string'
-      --location = convert(--location)
+    if $location is a 'string'
+      $location = convert($location)
 
-    if --location in --color-list
-      convert(s('border-color: --%s !important', --location))
-    else if --location in --location-list
-      if --size is 0
-        convert(s('border-%s: %s !important', --location, --size))
+    if $location in $color-list
+      convert(s('border-color: $%s !important', $location))
+    else if $location in $location-list
+      if $size is 0
+        convert(s('border-%s: %s !important', $location, $size))
       else
-        convert(s('border-%s: %s %s %s !important', --location, --size, --type, --color))
-  else if --location is 0 // asume they mean size
+        convert(s('border-%s: %s %s %s !important', $location, $size, $type, $color))
+  else if $location is 0 // asume they mean size
     border: 0 !important
   else
-    border: --size --type --color !important
+    border: $size $type $color !important
 
 
   // set-border()
@@ -41,28 +41,28 @@ set-border(--location = null, --size = 1px, --type = solid, --color = #e9ecef)
   // /*  border-left 0 !important */
 
   // set-border(primary)
-  // /*  border-color --primary !important */
+  // /*  border-color $primary !important */
 
   // set-border(secondary)
-  // /*  border-color --secondary !important */
+  // /*  border-color $secondary !important */
 
   // set-border(success)
-  // /*  border-color --success !important */
+  // /*  border-color $success !important */
 
   // set-border(info)
-  // /*  border-color --info !important */
+  // /*  border-color $info !important */
 
   // set-border(warning)
-  // /*  border-color --warning !important */
+  // /*  border-color $warning !important */
 
   // set-border(danger)
-  // /*  border-color --danger !important */
+  // /*  border-color $danger !important */
 
   // set-border(light)
-  // /*  border-color --light !important */
+  // /*  border-color $light !important */
 
   // set-border(dark)
-  // /*  border-color --dark !important */
+  // /*  border-color $dark !important */
 
   // set-border('white') // note the quotes!
-  // /*  border-color --white !important */
+  // /*  border-color $white !important */
