@@ -7,3 +7,53 @@
 //       display: table
 //   if $type
 //     vertical-align: arguments !important
+
+align($args = center, $width = null, $pos = relative)
+  // first determine if we are in self or container mode
+  if ('top' in $args or 'bottom' in $args) and ('left' in $args or 'right' in $args)
+    // container mode
+    display: flex
+    for $value in $args
+      if $value is 'left' or $value is 'right'
+        flex-direction: column
+
+
+    ../
+      display: flex
+
+  if 'top' in $args or 'bottom' in args
+  ../
+    flex-direction: column
+  position: $pos
+  if $width
+    // display: block
+    max-width: $width
+  if 'top' in $args
+    align-self: top
+  else if 'bottom' in $args
+    align-self: bottom
+  else if 'center' in $args
+    align-self: center
+  if 'left' in $args
+    justify-self: left
+  else if 'right' in $args
+    justify-self: right
+  else if 'center' in $args
+    justify-self: center
+
+
+align-self-sm($args = center)
+  @media (min-width: $grid-sm)
+    align($args)
+
+align-self-md($args = center)
+  @media (min-width: $grid-md)
+    align($args)
+
+align-self-lg($args = center)
+  @media (min-width: $grid-lg)
+    align($args = center)
+
+align-self-xl($args = center)
+  @media (min-width: $grid-xl)
+    align($args)
