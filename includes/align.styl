@@ -53,12 +53,12 @@ align($args = center, $mode = container)
         getJustX($args[1])
     else if $args[0] is 'center'
       if $args[1]
-        if $args[1] is 'top' or $args[1] is 'bottom'
+        if $args[1] in ('top' 'bottom')
           flex-direction: column
           align-content: center
           text-align: center
           getJustY($args[1])
-        else if $args[1] is 'left' or $args[1] is 'right'
+        else if $args[1] in ('left' 'right')
           flex-direction: row
           align-content: center
           getJustX($args[1])
@@ -71,15 +71,15 @@ align($args = center, $mode = container)
 
           align-content: center
           justify-content: center
-    else // self mode
-      if $mode in left right column
-        // in column first mode
-        if $args[0] is 'left'
-          align-self: flex-start
-        else if $args[0] is 'right'
-          align-self: flex-end
-        else if $args[0] is 'top'
-          float: top
+  else // self mode
+    if $mode in ('left' 'right' 'column')
+      // in column first mode
+      if $args[0] is 'left'
+        align-self: flex-start
+      else if $args[0] is 'right'
+        align-self: flex-end
+      else if $args[0] is 'top'
+        float: top
 
 align-sm($args = center)
   @media (min-width: $grid-sm)
