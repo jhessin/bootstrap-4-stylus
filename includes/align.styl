@@ -7,92 +7,115 @@
 //       display: table
 //   if $type
 //     vertical-align: arguments !important
+getAlignY($arg)
+  if $arg is 'top'
+    align-items: flex-start
+  else if $arg is 'bottom'
+    align-items: flex-end
+  else
+    align-items: unquote($arg)
 
 getJustY($arg)
   if $arg is 'top'
     justify-content: flex-start
-  else if $arg is 'center'
-    justify-content: center
   else if $arg is 'bottom'
     justify-content: flex-end
+  else
+    justify-content: unquote($arg)
+
+getAlignX($arg)
+  if $arg is 'left'
+    align-items: flex-start
+  if $arg is 'right'
+    align-items: flex-end
+  else
+    align-items: unquote($arg)
 
 getJustX($arg)
   if $arg is 'left'
     justify-content: flex-start
-  else if $arg is 'center'
-    justify-content: center
   else if $arg is 'right'
     justify-content: flex-end
+  else
+    justify-content: unquote($arg)
+
+alignSelfX($arg)
+  if $arg is 'left'
+    align-self: flex-start
+  else if $arg is 'right'
+    align-self: flex-end
+  else
+    align-self: unquote($arg)
+
+alignSelfY($arg)
+  if $arg is 'top'
+    align-self: flex-start
+  else if $arg is 'bottom'
+    align-self: flex-end
+  else
+    align-self: unquote($arg)
 
 align($args = center, $mode = container)
   // first determine if we are in self or container mode
-  if $mode is 'container'
+  if $mode is 'self'
+    // self mode
+    if $args[0] in ('left' 'right')
+      alignSelfX($args[0])
+    else
+      alignSelfY($args[0])
+  else
     // container mode
     display: flex
-    if $args[0] is 'right'
+    flex-wrap: wrap
+    if $args[0] in ('right' 'left')
       flex-direction: column
-      align-content: flex-end
-      text-align: right
+      getAlignX($args[0])
       if $args[1]
         getJustY($args[1])
-    else if $args[0] is 'left'
-      flex-direction: column
-      align-content: flex-start
-      text-align: left
+    else if $args[0] in ('top' 'bottom')
+      flex-direction: row
+      getAlignY($args[0])
       if $args[1]
         getJustY($args[1])
-    else if $args[0] is 'top'
-      flex-direction: row
-      align-content: flex-start
-      if $args[1]
-        getJustX($args[1])
-    else if $args[0] is 'bottom'
-      flex-direction: row
-      align-content: flex-end
-      if $args[1]
-        getJustX($args[1])
     else if $args[0] is 'center'
       if $args[1]
         if $args[1] in ('top' 'bottom')
           flex-direction: column
-          align-content: center
-          text-align: center
+          getAlignX($args[0])
           getJustY($args[1])
         else if $args[1] in ('left' 'right')
           flex-direction: row
-          align-content: center
+          getAlignY($args[0])
           getJustX($args[1])
         else if $args[1] is 'column'
           flex-direction: column
-          align-content: center
-          justify-content: center
-        else
+          getAlignX(center)
+          getJustY(center)
+        else if $args[1] is 'row'
           // assume center row
+          getAlignY(center)
+          getJustX(center)
+      else
+        // assume center
+        getAlignY(center)
+        getJustX(center)
 
-          align-content: center
-          justify-content: center
-  else // self mode
-    if $mode in ('left' 'right' 'column')
-      // in column first mode
-      if $args[0] is 'left'
-        align-self: flex-start
-      else if $args[0] is 'right'
-        align-self: flex-end
-      else if $args[0] is 'top'
-        float: top
+align-sm($args = center, $mode = container)
+  @media (max-width: $grid-sm)
+    align($args, $mode)
 
-align-sm($args = center)
-  @media (min-width: $grid-sm)
-    align($args)
+align-md($args = center, $mode = container)
+  @media (min-width: $grid-sm) and (max-width: $grid-md)
+    align($args, $mode)
 
-align-md($args = center)
-  @media (min-width: $grid-md)
-    align($args)
+align-lg($args = center, $mode = container)
+  @media (min-width: $grid-md) and (max-width: $grid-lg)
+    align($args, $mode)
 
-align-lg($args = center)
-  @media (min-width: $grid-lg)
-    align($args = center)
+align-xl($args = center, $mode = container)
+  @media (min-width: $grid-lg) and (max-width: $grid-xl)
+    align($args, $mode)
 
-align-xl($args = center)
+align-xlplus($args = center, $mode = container)
   @media (min-width: $grid-xl)
-    align($args)
+    align($args, $mode)
