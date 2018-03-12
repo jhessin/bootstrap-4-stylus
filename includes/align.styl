@@ -8,52 +8,91 @@
 //   if $type
 //     vertical-align: arguments !important
 
-align($args = center, $width = null, $pos = relative)
+getJustY($arg)
+  if $arg is 'top'
+    justify-content: flex-start
+  else if $arg is 'center'
+    justify-content: center
+  else if $arg is 'bottom'
+    justify-content: flex-end
+
+getJustX($arg)
+  if $arg is 'left'
+    justify-content: flex-start
+  else if $arg is 'center'
+    justify-content: center
+  else if $arg is 'right'
+    justify-content: flex-end
+
+align($args = center, $mode = container)
   // first determine if we are in self or container mode
-  if ('top' in $args or 'bottom' in $args) and ('left' in $args or 'right' in $args)
+  if $mode is 'container'
     // container mode
     display: flex
-    for $value in $args
-      if $value is 'left' or $value is 'right'
-        flex-direction: column
+    if $args[0] is 'right'
+      flex-direction: column
+      align-content: flex-end
+      text-align: right
+      if $args[1]
+        getJustY($args[1])
+    else if $args[0] is 'left'
+      flex-direction: column
+      align-content: flex-start
+      text-align: left
+      if $args[1]
+        getJustY($args[1])
+    else if $args[0] is 'top'
+      flex-direction: row
+      align-content: flex-start
+      if $args[1]
+        getJustX($args[1])
+    else if $args[0] is 'bottom'
+      flex-direction: row
+      align-content: flex-end
+      if $args[1]
+        getJustX($args[1])
+    else if $args[0] is 'center'
+      if $args[1]
+        if $args[1] is 'top' or $args[1] is 'bottom'
+          flex-direction: column
+          align-content: center
+          text-align: center
+          getJustY($args[1])
+        else if $args[1] is 'left' or $args[1] is 'right'
+          flex-direction: row
+          align-content: center
+          getJustX($args[1])
+        else if $args[1] is 'column'
+          flex-direction: column
+          align-content: center
+          justify-content: center
+        else
+          // assume center row
 
+          align-content: center
+          justify-content: center
+    else // self mode
+      if $mode in left right column
+        // in column first mode
+        if $args[0] is 'left'
+          align-self: flex-start
+        else if $args[0] is 'right'
+          align-self: flex-end
+        else if $args[0] is 'top'
+          float: top
 
-    ../
-      display: flex
-
-  if 'top' in $args or 'bottom' in args
-  ../
-    flex-direction: column
-  position: $pos
-  if $width
-    // display: block
-    max-width: $width
-  if 'top' in $args
-    align-self: top
-  else if 'bottom' in $args
-    align-self: bottom
-  else if 'center' in $args
-    align-self: center
-  if 'left' in $args
-    justify-self: left
-  else if 'right' in $args
-    justify-self: right
-  else if 'center' in $args
-    justify-self: center
-
-
-align-self-sm($args = center)
+align-sm($args = center)
   @media (min-width: $grid-sm)
     align($args)
 
-align-self-md($args = center)
+align-md($args = center)
   @media (min-width: $grid-md)
     align($args)
 
-align-self-lg($args = center)
+align-lg($args = center)
   @media (min-width: $grid-lg)
     align($args = center)
 
-align-self-xl($args = center)
+align-xl($args = center)
   @media (min-width: $grid-xl)
     align($args)
