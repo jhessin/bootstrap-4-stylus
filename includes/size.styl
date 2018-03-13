@@ -1,7 +1,10 @@
-setSize($width = auto, $height = auto)
+setSize($width = none, $height = auto)
   if ($width is a 'unit') and (not unit($width))
     $width = unit($width, px)
   if ($height is a 'unit') and (not unit($height))
     $height = unit($height, px)
+  if $width in ('fill-available' 'fit-content')
+    convert(s('max-width: -moz-%s;', $width))
+    convert(s('max-width: -webkit-%s;', $width))
   max-width: $width
   height: $height

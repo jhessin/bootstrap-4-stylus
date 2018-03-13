@@ -273,3 +273,17 @@ template
 
 [hidden]
   display none !important
+
+// a helper to darken or lighten a color
+highlight($args...)
+  $color = @color
+  $percent = 50%
+  for $arg in $args
+    if $arg is a 'rgba'
+      $color = $arg
+    if ($arg is a 'unit') and (unit($arg) is '%')
+      $percent = $arg
+  if light($color)
+    darken($color, $percent)
+  else
+    lighten($color, $percent)
