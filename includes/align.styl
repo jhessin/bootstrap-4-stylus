@@ -48,19 +48,19 @@ alignSelfY($arg)
   else
     align-self: unquote($arg)
 
-align($args = center)
+align($args...)
   // first determine if we are in self or container mode
   if length($args) is 1
     // self mode
-    if $args[0] in ('left' 'right')
+    if $args in ('left' 'right')
       ../
         flex-direction: column
-      alignSelfX($args[0])
+      alignSelfX($args)
     else
-      if $args[0] in ('top' 'bottom')
+      if $args in ('top' 'bottom')
         ../
           flex-direction: row
-      alignSelfY($args[0])
+      alignSelfY($args)
   else if length($args) is 2
     // container mode
     display: flex

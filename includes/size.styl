@@ -1,3 +1,7 @@
 setSize($width = auto, $height = auto)
+  if ($width is a 'unit') and (not unit($width))
+    $width = unit($width, px)
+  if ($height is a 'unit') and (not unit($height))
+    $height = unit($height, px)
   max-width: $width
   height: $height

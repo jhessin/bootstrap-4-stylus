@@ -1,25 +1,33 @@
-$location-list = top, bottom, right, left, null
-$color-list = primary, secondary, success, info, warning, danger, light, dark, white
-set-border($location = null, $size = 1px, $type = solid, $color = #e9ecef)
-
+border($args...)
   // start building the result
-  if $location
+  $size = $default-border-size
+  $type = $default-border-type
+  $color = $default-border-color
+  $locations = ()
 
-    // convert any string
-    if $location is a 'string'
-      $location = convert($location)
+  for $arg in $args
 
-    if $location in $color-list
-      convert(s('border-color: $%s !important', $location))
-    else if $location in $location-list
+    if $arg in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark' 'white')
+      $color = convert(s('$%s', $arg))
+    else if $arg is a 'rgba'
+      $color = $arg
+    else if $arg in (top bottom right left)
+      push($locations, $arg)
+    else if $arg is a 'unit' // asume they mean size
+      $size = $arg
+    else if $arg
+      $type = $arg
+  if length($locations) > 0
+    for $location in $locations
       if $size is 0
-        convert(s('border-%s: %s !important', $location, $size))
+        convert(s('border-%s: 0 !important;', $location))
       else
-        convert(s('border-%s: %s %s %s !important', $location, $size, $type, $color))
-  else if $location is 0 // asume they mean size
-    border: 0 !important
+        convert(s('border-%s: %s %s %s !important;', $location, $size, $type, $color))
   else
-    border: $size $type $color !important
+    if $size is 0
+      border: 0 !important
+    else
+      border: $size $type $color !important
 
 
   // set-border()
@@ -28,16 +36,16 @@ set-border($location = null, $size = 1px, $type = solid, $color = #e9ecef)
   // set-border(0)
   // /*  border 0 !important */
 
-  // set-border(top,0)
+  // set-border(top 0)
   // /*  border-top 0 !important */
 
-  // set-border(right,0)
+  // set-border(right 0)
   // /*  border-right 0 !important */
 
-  // set-border(bottom,0)
+  // set-border(bottom 0)
   // /*  border-bottom 0 !important */
 
-  // set-border(left,0)
+  // set-border(left 0)
   // /*  border-left 0 !important */
 
   // set-border(primary)
