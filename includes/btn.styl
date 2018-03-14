@@ -169,89 +169,56 @@ btn()
 
     for $value in $flags
       if $value in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark')
-        &:focus
-        &.{$focusClass}
-          box-shadow: 0 0 0 3px parse($value, 'Shadow')
-        if 'outline' in $flags
-          color: parse($value)
-          background-color: transparent
-          background-image: none
-          border-color: parse($value)
-          &:hover
-            color: blackorwhite(parse($value))
-            background-color: parse($value)
-            border-color: parse($value)
-
-          &:disabled
-          &{$disabledClass}
-            color: parse($value)
-            background-color: transparent
-
-          &:active
-          &.{$activeClass}
-          .{$showClass} > {$this}.{$toggleClass}
-            background-color: parse($value)
-            color: whiteorblack(parse($value))
-            border-color: parse($value)
-
-        else // not outline
-          color: blackorwhite(parse($value))
-          background-color: parse($value)
-          border-color: parse($value)
-          &:hover
-            color: blackorwhite(parse($value))
-            background-color: parse($value, 'BtnHov')
-            border-color: parse($value, 'Hov')
-          &:disabled
-          &{$disabledClass}
-            background-color: parse($value)
-            border-color: parse($value)
-          &:active
-          &.{$activeClass}
-          .{$showClass} > {$this}.{$toggleClass}
-            background-color: parse($value, 'BtnHov')
-            background-image: none
-            border-color: parse($value, 'Hov')
+        $color = parse($value)
+        $shadow = parse($value, 'Shadow')
+        $hover = parse($value, 'Hov')
+        $btnHover = parse($value, 'BtnHov')
       else if $value is a 'rgba'
+        $color = $value
+        $shadow = alpha($value, 0.5)
+        $hover = lighten($value, 20%)
+        $btnHover = darken($value, 20%)
+      if $color is defined
         &:focus
         &.{$focusClass}
-          box-shadow: 0 0 0 3px $value
+          box-shadow: 0 0 0 3px $shadow
         if 'outline' in $flags
-          color: $value
+          color: $color
           background-color: transparent
           background-image: none
-          border-color: $value
+          border-color: $color
           &:hover
-            color: blackorwhite($value)
-            background-color: $value
-            border-color: $value
+            color: blackorwhite($color)
+            background-color: $color
+            border-color: $color
 
           &:disabled
           &{$disabledClass}
-            color: $value
+            color: $color
             background-color: transparent
 
           &:active
           &.{$activeClass}
           .{$showClass} > {$this}.{$toggleClass}
-            background-color: $value
-            color: whiteorblack($value)
-            border-color: $value
+            background-color: $color
+            color: whiteorblack($color)
+            border-color: $color
+
         else // not outline
-          color: blackorwhite($value)
-          background-color: $value
-          border-color: $value
+          color: blackorwhite($color)
+          background-color: $color
+          border-color: $color
           &:hover
-            color: blackorwhite($value)
-            background-color: darken($value, 20%)
-            border-color: lighten($value, 10%)
+            color: blackorwhite($color)
+            background-color: $btnHover
+            border-color: $hover
           &:disabled
           &{$disabledClass}
-            background-color: $value
-            border-color: $value
+            background-color: $color
+            border-color: $color
           &:active
           &.{$activeClass}
           .{$showClass} > {$this}.{$toggleClass}
-            background-color: darken($value, 20%)
+            background-color: $btnHover
             background-image: none
-            border-color: lighten($value, 10%)
+            border-color: $hover
