@@ -12,6 +12,19 @@ highlight($args...)
   else
     lighten($color, $percent)
 
+blackorwhite($color, $black = #111, $white = $white)
+  if $color is a 'rgba'
+    if light($color)
+      $black
+    else
+      $white
+
+parse($value, $postfix = '', $prefix = '$')
+  $value = unquote($value)
+  $prefix = unquote($prefix)
+  $postfix = unquote($postfix)
+  convert(s('%s%s%s', $prefix, $value, $postfix))
+
 // A utility to discover what is being passed
 discover()
   content: s('length(arguments) = %s', length(arguments))

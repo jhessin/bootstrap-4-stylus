@@ -12,6 +12,10 @@ btn()
         $disabledClass = $value
       else if $key is 'activeClass'
         $activeClass = $value
+      else if $key is 'showClass'
+        $showClass = $value
+      else if $key is 'toggleClass'
+        $toggleClass = $value
   else
     for $value in arguments
       if $value is a 'object'
@@ -22,12 +26,18 @@ btn()
             $disabledClass = $class
           else if $key is 'activeClass'
             $activeClass = $class
+          else if $key is 'showClass'
+            $showClass = $class
+          else if $key is 'toggleClass'
+            $toggleClass = $class
       else
         push($flags, $value)
 
   $focusClass := 'focus'
   $disabledClass := 'disabled'
   $activeClass := 'active'
+  $showClass := 'show'
+  $toggleClass := 'toggle'
   content: $focusClass $disabledClass $activeClass
   // END ARGUMENT PARSE
 
@@ -68,6 +78,23 @@ btn()
   fieldset[disabled] a{$this}
     pointer-events none
 
+  /
+    input[type='submit']{$this}
+    input[type='reset']{$this}
+    input[type='button']{$this}
+      width: 100%
+    .{showClass}
+      & > a
+        outline: 0
+    [data-toggle='buttons']
+      {$this} input [type='radio']
+      {$this} input [type='checkbox']
+        position: absolute
+        clip: rect(0, 0, 0, 0)
+        pointer-events: none
+
+
+  // Handle flags and special cases
   if 'lg' in $flags
     padding 0.5rem 1rem
     font-size 1.25rem
@@ -85,3 +112,72 @@ btn()
     width 100%
     & + &
       margin-top 0.5rem
+
+  if 'fade' in $flags
+    opacity: 0
+    transition: opacity 0.15s linear
+    &.{$showClass}
+      opacity: 1
+
+  if 'collapse' in $flags
+    display: none
+    position: relative
+    height: 0
+    overflow: hidden
+    transition: height 0.35s ease
+    &.{$showClass}
+      display: block
+
+    /
+      tr
+        &.{$showClass}
+          display: table-row
+      tbody
+        &.{$showClass}
+          display: table-row-group
+
+  for $value in $flags
+    if $value in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark')
+      if 'outline' in $flags
+        color: parse($value)
+        background-color: transparent
+        background-image: none
+        border-color: parse($value)
+        &:hover
+          color: blackorwhite(parse($value))
+          background-color: parse($value)
+          border-color: parse($value)
+
+        &:disabled
+        &{$disabledClass}
+          color: parse($value)
+          background-color: transparent
+
+        &:active
+        &.{$activeClass}
+        .{$showClass} > {$this}.{$toggleClass}
+          background-color: parse($value)
+          color: whiteorblack(parse($value))
+          border-color: parse($value)
+
+      else
+        color: blackorwhite(parse($value))
+        background-color: parse($value)
+        border-color: parse($value)
+        &:hover
+          color: blackorwhite(parse($value))
+          background-color: parse($value, 'BtnHov')
+          border-color: parse($value, 'Hov')
+        &:disabled
+        &{$disabledClass}
+          background-color: parse($value)
+          border-color: parse($value)
+        &:active
+        &.{$activeClass}
+        .{$showClass} > {$this}.{$toggleClass}
+          background-color: parse($value, 'BtnHov')
+          background-image: none
+          border-color: parse($value, 'Hov')
+      &:focus
+      &.{$focusClass}
+        box-shadow: 0 0 0 3px parse($value, 'Shadow')

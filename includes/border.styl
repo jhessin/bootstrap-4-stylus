@@ -8,7 +8,7 @@ border($args...)
   for $arg in $args
 
     if $arg in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark' 'white')
-      $color = convert(s('$%s', $arg))
+      $color = parse($arg)
     else if $arg is a 'rgba'
       $color = $arg
     else if $arg in (top bottom right left)
@@ -20,9 +20,9 @@ border($args...)
   if length($locations) > 0
     for $location in $locations
       if $size is 0
-        convert(s('border-%s: 0 !important;', $location))
+        parse($location, ': 0 !important;', 'border-')
       else
-        convert(s('border-%s: %s %s %s !important;', $location, $size, $type, $color))
+        parse($location, ':', 'border-') parse($size) parse($type) parse($color)
   else
     if $size is 0
       border: 0 !important
