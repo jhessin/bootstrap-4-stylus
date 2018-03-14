@@ -41,143 +41,217 @@ btn()
   content: $focusClass $disabledClass $activeClass
   // END ARGUMENT PARSE
 
-  display inline-block
-  font-weight $font-weight-normal
-  text-align center
-  white-space nowrap
-  vertical-align middle
-  -webkit-user-select none
-  -moz-user-select none
-  -ms-user-select none
-  user-select none
-  border 1px solid transparent
-  padding 0.5rem 0.75rem
-  font-size 1rem
-  line-height 1.25
-  border-radius 0.25rem
-  transition all 0.15s ease-in-out
+  if 'link' in $flags
+    font-weight: $font-weight-normal
+    color: $primary
+    border-radius: 0
+    &:hover
+      border-color: transparent
+    &:disabled
+      color: $secondary
 
-  &:focus
-  &:hover
-    text-decoration none
+    &, &:active
+    &.{activeClass}
+    &:disabled
+      background-color: transparent
 
-  &:focus
-  &.{$focusClass}
-    outline 0
-    box-shadow 0 0 0 3px rgba(0, 123, 255, 0.25)
+    &, &:focus
+    &:active
+      border-color: transparent
+      box-shadow: none
 
-  &:disabled
-  &.{$disabledClass}
-    opacity .65
+    &:focus
+    &:hover
+      color: #0056b3
+      text-decoration: underline
+      background-color: transparent
 
-  &:active
-  &.{$activeClass}
-    background-image none
+    &:disabled:focus
+    &:disabled:hover
+      text-decoration: none
+  else
+    // Default btn
+    display inline-block
+    font-weight $font-weight-normal
+    text-align center
+    white-space nowrap
+    vertical-align middle
+    -webkit-user-select none
+    -moz-user-select none
+    -ms-user-select none
+    user-select none
+    border 1px solid transparent
+    padding 0.5rem 0.75rem
+    font-size 1rem
+    line-height 1.25
+    border-radius 0.25rem
+    transition all 0.15s ease-in-out
 
-  a{$this}.disabled
-  fieldset[disabled] a{$this}
-    pointer-events none
+    &:focus
+    &:hover
+      text-decoration none
 
-  /
-    input[type='submit']{$this}
-    input[type='reset']{$this}
-    input[type='button']{$this}
-      width: 100%
-    .{showClass}
-      & > a
-        outline: 0
-    [data-toggle='buttons']
-      {$this} input [type='radio']
-      {$this} input [type='checkbox']
-        position: absolute
-        clip: rect(0, 0, 0, 0)
-        pointer-events: none
+    &:focus
+    &.{$focusClass}
+      outline 0
+      box-shadow 0 0 0 3px rgba(0, 123, 255, 0.25)
 
+    &:disabled
+    &.{$disabledClass}
+      opacity .65
 
-  // Handle flags and special cases
-  if 'lg' in $flags
-    padding 0.5rem 1rem
-    font-size 1.25rem
-    line-height 1.5
-    border-radius 0.3rem
+    &:active
+    &.{$activeClass}
+      background-image none
 
-  if 'sm' in $flags
-    padding 0.25rem 0.5rem
-    font-size 0.875rem
-    line-height 1.5
-    border-radius 0.2rem
-
-  if 'block' in $flags
-    display block
-    width 100%
-    & + &
-      margin-top 0.5rem
-
-  if 'fade' in $flags
-    opacity: 0
-    transition: opacity 0.15s linear
-    &.{$showClass}
-      opacity: 1
-
-  if 'collapse' in $flags
-    display: none
-    position: relative
-    height: 0
-    overflow: hidden
-    transition: height 0.35s ease
-    &.{$showClass}
-      display: block
 
     /
-      tr
-        &.{$showClass}
-          display: table-row
-      tbody
-        &.{$showClass}
-          display: table-row-group
+      a{$this}.disabled
+      fieldset[disabled] a{$this}
+        pointer-events none
 
-  for $value in $flags
-    if $value in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark')
-      if 'outline' in $flags
-        color: parse($value)
-        background-color: transparent
-        background-image: none
-        border-color: parse($value)
-        &:hover
-          color: blackorwhite(parse($value))
-          background-color: parse($value)
-          border-color: parse($value)
+      input[type='submit']{$this}
+      input[type='reset']{$this}
+      input[type='button']{$this}
+        width: 100%
+      .{showClass}
+        & > a
+          outline: 0
+      [data-toggle='buttons']
+        {$this} input [type='radio']
+        {$this} input [type='checkbox']
+          position: absolute
+          clip: rect(0, 0, 0, 0)
+          pointer-events: none
 
-        &:disabled
-        &{$disabledClass}
+
+    // Handle flags and special cases
+    if 'lg' in $flags
+      padding 0.5rem 1rem
+      font-size 1.25rem
+      line-height 1.5
+      border-radius 0.3rem
+
+    if 'sm' in $flags
+      padding 0.25rem 0.5rem
+      font-size 0.875rem
+      line-height 1.5
+      border-radius 0.2rem
+
+    if 'block' in $flags
+      display block
+      width 100%
+      & + &
+        margin-top 0.5rem
+
+    if 'fade' in $flags
+      opacity: 0
+      transition: opacity 0.15s linear
+      &.{$showClass}
+        opacity: 1
+
+    if 'collapse' in $flags
+      display: none
+      position: relative
+      height: 0
+      overflow: hidden
+      transition: height 0.35s ease
+      &.{$showClass}
+        display: block
+
+      /
+        tr
+          &.{$showClass}
+            display: table-row
+        tbody
+          &.{$showClass}
+            display: table-row-group
+
+    for $value in $flags
+      if $value in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark')
+        &:focus
+        &.{$focusClass}
+          box-shadow: 0 0 0 3px parse($value, 'Shadow')
+        if 'outline' in $flags
           color: parse($value)
           background-color: transparent
-
-        &:active
-        &.{$activeClass}
-        .{$showClass} > {$this}.{$toggleClass}
-          background-color: parse($value)
-          color: whiteorblack(parse($value))
-          border-color: parse($value)
-
-      else
-        color: blackorwhite(parse($value))
-        background-color: parse($value)
-        border-color: parse($value)
-        &:hover
-          color: blackorwhite(parse($value))
-          background-color: parse($value, 'BtnHov')
-          border-color: parse($value, 'Hov')
-        &:disabled
-        &{$disabledClass}
-          background-color: parse($value)
-          border-color: parse($value)
-        &:active
-        &.{$activeClass}
-        .{$showClass} > {$this}.{$toggleClass}
-          background-color: parse($value, 'BtnHov')
           background-image: none
-          border-color: parse($value, 'Hov')
-      &:focus
-      &.{$focusClass}
-        box-shadow: 0 0 0 3px parse($value, 'Shadow')
+          border-color: parse($value)
+          &:hover
+            color: blackorwhite(parse($value))
+            background-color: parse($value)
+            border-color: parse($value)
+
+          &:disabled
+          &{$disabledClass}
+            color: parse($value)
+            background-color: transparent
+
+          &:active
+          &.{$activeClass}
+          .{$showClass} > {$this}.{$toggleClass}
+            background-color: parse($value)
+            color: whiteorblack(parse($value))
+            border-color: parse($value)
+
+        else // not outline
+          color: blackorwhite(parse($value))
+          background-color: parse($value)
+          border-color: parse($value)
+          &:hover
+            color: blackorwhite(parse($value))
+            background-color: parse($value, 'BtnHov')
+            border-color: parse($value, 'Hov')
+          &:disabled
+          &{$disabledClass}
+            background-color: parse($value)
+            border-color: parse($value)
+          &:active
+          &.{$activeClass}
+          .{$showClass} > {$this}.{$toggleClass}
+            background-color: parse($value, 'BtnHov')
+            background-image: none
+            border-color: parse($value, 'Hov')
+      else if $value is a 'rgba'
+        &:focus
+        &.{$focusClass}
+          box-shadow: 0 0 0 3px $value
+        if 'outline' in $flags
+          color: $value
+          background-color: transparent
+          background-image: none
+          border-color: $value
+          &:hover
+            color: blackorwhite($value)
+            background-color: $value
+            border-color: $value
+
+          &:disabled
+          &{$disabledClass}
+            color: $value
+            background-color: transparent
+
+          &:active
+          &.{$activeClass}
+          .{$showClass} > {$this}.{$toggleClass}
+            background-color: $value
+            color: whiteorblack($value)
+            border-color: $value
+        else // not outline
+          color: blackorwhite($value)
+          background-color: $value
+          border-color: $value
+          &:hover
+            color: blackorwhite($value)
+            background-color: darken($value, 20%)
+            border-color: lighten($value, 10%)
+          &:disabled
+          &{$disabledClass}
+            background-color: $value
+            border-color: $value
+          &:active
+          &.{$activeClass}
+          .{$showClass} > {$this}.{$toggleClass}
+            background-color: darken($value, 20%)
+            background-image: none
+            border-color: lighten($value, 10%)
