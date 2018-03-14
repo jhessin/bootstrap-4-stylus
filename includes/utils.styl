@@ -1,0 +1,33 @@
+// a helper to darken or lighten a color
+highlight($args...)
+  $color = @color
+  $percent = 50%
+  for $arg in $args
+    if $arg is a 'rgba'
+      $color = $arg
+    if ($arg is a 'unit') and (unit($arg) is '%')
+      $percent = $arg
+  if light($color)
+    darken($color, $percent)
+  else
+    lighten($color, $percent)
+
+// A utility to discover what is being passed
+discover()
+  content: s('length(arguments) = %s', length(arguments))
+  content: s('typeof(arguments) = %s', typeof(arguments))
+  content: s('arguments = %s', arguments)
+  if length(arguments) > 1
+    for $key, $value in arguments
+      if typeof(arguments) isnt 'object'
+        content: s('arguments[%s] = %s', $value, $key)
+        content: s('typeof(arguments[%s]) = %s', $value, typeof($key))
+        if length($key) > 1
+          {$value}
+            discover($key)
+      else
+        content: s('arguments["%s"] = %s', $key, $value)
+        content: s('typeof(arguments[%s]) = %s', $key, typeof($value))
+        if length($value) > 1
+          {$key}
+            discover($value)

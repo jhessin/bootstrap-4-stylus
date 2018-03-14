@@ -1,4 +1,36 @@
-btn($focusClass = 'focus', $disabledClass = 'disabled')
+btn()
+  // PARSE ARGUMENTS
+  $flags = ()
+  // get the name of this class
+  $this = split(' ', unquote(selector()))[-1]
+  if arguments is a 'object'
+    // get classnames
+    for $key, $value in arguments
+      if $key is 'focusClass'
+        $focusClass = $value
+      else if $key is 'disabledClass'
+        $disabledClass = $value
+      else if $key is 'activeClass'
+        $activeClass = $value
+  else
+    for $value in arguments
+      if $value is a 'object'
+        for $key, $class in $value
+          if $key is 'focusClass'
+            $focusClass = $class
+          else if $key is 'disabledClass'
+            $disabledClass = $class
+          else if $key is 'activeClass'
+            $activeClass = $class
+      else
+        push($flags, $value)
+
+  $focusClass := 'focus'
+  $disabledClass := 'disabled'
+  $activeClass := 'active'
+  content: $focusClass $disabledClass $activeClass
+  // END ARGUMENT PARSE
+
   display inline-block
   font-weight $font-weight-normal
   text-align center
@@ -24,32 +56,32 @@ btn($focusClass = 'focus', $disabledClass = 'disabled')
     outline 0
     box-shadow 0 0 0 3px rgba(0, 123, 255, 0.25)
 
-  &.{$disabledClass}
   &:disabled
+  &.{$disabledClass}
     opacity .65
 
   &:active
-  &.active
+  &.{$activeClass}
     background-image none
 
-  a&.disabled
-  fieldset[disabled] a&
+  a{$this}.disabled
+  fieldset[disabled] a{$this}
     pointer-events none
 
-.btn-lg, .btn-group-lg > .btn
-  padding 0.5rem 1rem
-  font-size 1.25rem
-  line-height 1.5
-  border-radius 0.3rem
+  if 'lg' in $flags
+    padding 0.5rem 1rem
+    font-size 1.25rem
+    line-height 1.5
+    border-radius 0.3rem
 
-.btn-sm, .btn-group-sm > .btn
-  padding 0.25rem 0.5rem
-  font-size 0.875rem
-  line-height 1.5
-  border-radius 0.2rem
+  if 'sm' in $flags
+    padding 0.25rem 0.5rem
+    font-size 0.875rem
+    line-height 1.5
+    border-radius 0.2rem
 
-.btn-block
-  display block
-  width 100%
-  & + .btn-block
-    margin-top 0.5rem
+  if 'block' in $flags
+    display block
+    width 100%
+    & + &
+      margin-top 0.5rem
