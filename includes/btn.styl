@@ -3,41 +3,32 @@ btn()
   $flags = ()
   // get the name of this class
   $this = split(' ', unquote(selector()))[-1]
-  if arguments is a 'object'
-    // get classnames
-    for $key, $value in arguments
-      if $key is 'focusClass'
-        $focusClass = $value
-      else if $key is 'disabledClass'
-        $disabledClass = $value
-      else if $key is 'activeClass'
-        $activeClass = $value
-      else if $key is 'showClass'
-        $showClass = $value
-      else if $key is 'toggleClass'
-        $toggleClass = $value
-  else
-    for $value in arguments
-      if $value is a 'object'
-        for $key, $class in $value
-          if $key is 'focusClass'
-            $focusClass = $class
-          else if $key is 'disabledClass'
-            $disabledClass = $class
-          else if $key is 'activeClass'
-            $activeClass = $class
-          else if $key is 'showClass'
-            $showClass = $class
-          else if $key is 'toggleClass'
-            $toggleClass = $class
-      else
-        push($flags, $value)
 
+  // set default classes
   $focusClass := 'focus'
   $disabledClass := 'disabled'
   $activeClass := 'active'
   $showClass := 'show'
   $toggleClass := 'toggle'
+
+  if arguments is a 'object'
+    // get classnames
+    $focusClass = arguments.focusClass or $focusClass
+    $disabledClass = arguments.disabledClass or $disabledClass
+    $activeClass = arguments.activeClass or $activeClass
+    $showClass = arguments.showClass or $showClass
+    $toggleClass = arguments.toggleClass or $toggleClass
+  else
+    for $value in arguments
+      if $value is a 'object'
+        $focusClass = $value.focusClass or $focusClass
+        $disabledClass = $value.disabledClass or $disabledClass
+        $activeClass = $value.activeClass or $activeClass
+        $showClass = $value.showClass or $showClass
+        $toggleClass = $value.toggleClass or $toggleClass
+      else
+        push($flags, $value)
+
   content: $focusClass $disabledClass $activeClass
   // END ARGUMENT PARSE
 
