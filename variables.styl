@@ -1,46 +1,47 @@
 
 // colors
 $primary := #007bff
-$primaryHov := #0062cc
-$primaryBtnHov := #0069d9
-$primaryShadow := rgba(0, 123, 255, 0.5)
+$primaryHov := darken($primary, 11%)
+$primaryBtnHov := darken($primary, 8%)
+$primaryShadow := alpha($primary, 0.5)
+// $primaryShadow := alpha($primary, 0.5)
 $secondary := #868e96
-$secondaryHov := #6c757d
-$secondaryBtnHov := #727b84
-$secondaryShadow := rgba(134, 142, 150, 0.5)
+$secondaryHov := darken($secondary, 11%)
+$secondaryBtnHov := darken($secondary, 8%)
+$secondaryShadow := alpha($secondary, 0.5)
 $success := #28a745
-$successHov := #1e7e34
-$successBtnHov := #218838
-$successShadow := rgba(40, 167, 69, 0.5)
+$successHov := darken($success, 11%)
+$successBtnHov := darken($success, 8%)
+$successShadow := alpha($success, 0.5)
 $info := #17a2b8
-$infoHov := #117a8b
-$infoBtnHov := #138496
-$infoShadow := rgba(23, 162, 184, 0.5)
+$infoHov := darken($info, 11%)
+$infoBtnHov := darken($info, 8%)
+$infoShadow := alpha($info, 0.5)
 $warning := #ffc107
-$warningHov := #d39e00
-$warningBtnHov := #e0a800
-$warningShadow := rgba(255, 193, 7, 0.5)
+$warningHov := darken($warning, 11%)
+$warningBtnHov := darken($warning, 8%)
+$warningShadow := alpha($warning, 0.5)
 $danger := #dc3545
-$dangerHov := #bd2130
-$dangerBtnHov := #c82333
-$dangerShadow := rgba(220, 53, 69, 0.5)
+$dangerHov := darken($danger, 11%)
+$dangerBtnHov := darken($danger, 8%)
+$dangerShadow := alpha($danger, 0.5)
 $light := #f8f9fa
-$lightHov := #dae0e5
-$lightBtnHov := #e2e6ea
-$lightShadow := rgba(248, 249, 250, 0.5)
+$lightHov := darken($light, 11%)
+$lightBtnHov := darken($light, 8%)
+$lightShadow := alpha($light, 0.5)
 $dark := #343a40
-$darkHov := #1d2124
-$darkBtnHov := #23272b
-$darkShadow := rgba(52, 58, 64, 0.5)
+$darkHov := darken($dark, 11%)
+$darkBtnHov := darken($dark, 8%)
+$darkShadow := alpha($dark, 0.5)
 
-$white := #fff
-$black := #000
+$white := white
+$black := black
 
 $bodyColor := $black
 if light($bodyColor)
-  $linkColor := shade($bodyColor, 60%)
+  $linkColor := darken($bodyColor, 60%)
 else
-  $linkColor := tint($bodyColor, 60%)
+  $linkColor := lighten($bodyColor, 60%)
 $bodyBackground := $white
 
 //layout mode

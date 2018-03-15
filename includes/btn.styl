@@ -168,6 +168,7 @@ btn()
             display: table-row-group
 
     for $value in $flags
+      $color = null
       if $value in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark')
         $color = parse($value)
         $shadow = parse($value, 'Shadow')
@@ -176,9 +177,9 @@ btn()
       else if $value is a 'rgba'
         $color = $value
         $shadow = alpha($value, 0.5)
-        $hover = lighten($value, 20%)
-        $btnHover = darken($value, 20%)
-      if $color is defined
+        $hover = darken($value, 11%)
+        $btnHover = darken($value, 8%)
+      if $color
         &:focus
         &.{$focusClass}
           box-shadow: 0 0 0 3px $shadow
