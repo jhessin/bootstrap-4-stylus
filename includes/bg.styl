@@ -1,5 +1,5 @@
 
-bg($back = $bodyBackground, $fore = $back is a 'rgba' ? invert($back) : $bodyColor, $hover = highlight($fore))
+bg($back = $bodyBackground, $fore = $back is a 'rgba' ? blackorwhite($back) : $bodyColor, $hover = highlight($fore))
   if $back is a 'rgba'
     background-color: $back
   else if $back is a 'call'

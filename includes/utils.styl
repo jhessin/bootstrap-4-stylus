@@ -27,7 +27,7 @@ compare($color1, $color2)
           $result = s('color2 is %s lighter than color1', num)
       content: $result
 
-blackorwhite($color, $black = #111, $white = $white)
+blackorwhite($color, $black = black, $white = white)
   if $color is a 'rgba'
     if light($color)
       $black

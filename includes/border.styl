@@ -1,11 +1,11 @@
-border($args...)
+border()
   // start building the result
   $size = $default-border-size
   $type = $default-border-type
   $color = $default-border-color
   $locations = ()
 
-  for $arg in $args
+  for $arg in arguments
 
     if $arg in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark' 'white')
       $color = parse($arg)

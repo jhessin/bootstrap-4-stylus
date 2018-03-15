@@ -48,43 +48,43 @@ alignSelfY($arg)
   else
     align-self: unquote($arg)
 
-align($args...)
+align()
   // first determine if we are in self or container mode
-  if length($args) is 1
+  if length(arguments) is 1
     // self mode
-    if $args in ('left' 'right')
+    if arguments in ('left' 'right')
       ../
         flex-direction: column
-      alignSelfX($args)
+      alignSelfX(arguments)
     else
-      if $args in ('top' 'bottom')
+      if arguments in ('top' 'bottom')
         ../
           flex-direction: row
-      alignSelfY($args)
-  else if length($args) is 2
+      alignSelfY(arguments)
+  else if length(arguments) is 2
     // container mode
     display: flex
     flex-wrap: wrap
-    if $args[0] in ('right' 'left')
+    if arguments[0] in ('right' 'left')
       flex-direction: column
-      alignX($args[0])
-      if $args[1]
-        justY($args[1])
-    else if $args[0] in ('top' 'bottom')
+      alignX(arguments[0])
+      if arguments[1]
+        justY(arguments[1])
+    else if arguments[0] in ('top' 'bottom')
       flex-direction: row
-      alignY($args[0])
-      if $args[1]
-        justY($args[1])
-    else if $args[0] is 'center'
-      if $args[1] in ('top' 'bottom')
+      alignY(arguments[0])
+      if arguments[1]
+        justY(arguments[1])
+    else if arguments[0] is 'center'
+      if arguments[1] in ('top' 'bottom')
         flex-direction: column
-        alignX($args[0])
-        justY($args[1])
-      else if $args[1] in ('left' 'right')
+        alignX(arguments[0])
+        justY(arguments[1])
+      else if arguments[1] in ('left' 'right')
         flex-direction: row
-        alignY($args[0])
-        justX($args[1])
-      else if $args[1] is 'column'
+        alignY(arguments[0])
+        justX(arguments[1])
+      else if arguments[1] is 'column'
         flex-direction: column
         alignX(center)
         justY(center)
