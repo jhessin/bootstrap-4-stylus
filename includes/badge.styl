@@ -1,5 +1,5 @@
 badge()
-  $flags = arguments or 'primary'
+  $flags = arguments or ('primary')
 
   display inline-block
   padding 0.25em 0.4em
@@ -18,12 +18,12 @@ badge()
     position relative
     top -1px
 
-  else if 'pill' in $flags
+  if 'pill' in $flags
     padding-right 0.6em
     padding-left 0.6em
     border-radius 10rem
 
-  else if 'primary' in $flags
+  if 'primary' in $flags
     color $white
     background-color $primary
     &[href]:focus
