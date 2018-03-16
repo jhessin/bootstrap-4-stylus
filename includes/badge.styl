@@ -1,4 +1,6 @@
-badge($types...)
+badge()
+  $flags = arguments or 'primary'
+
   display inline-block
   padding 0.25em 0.4em
   font-size 75%
@@ -11,90 +13,90 @@ badge($types...)
   border-radius 0.25rem
   &:empty
     display none
-  for $type in $types
-    if $type is 'btn'
-      position relative
-      top -1px
 
-    else if $type is 'pill'
-      padding-right 0.6em
-      padding-left 0.6em
-      border-radius 10rem
+  if 'btn' in $flags
+    position relative
+    top -1px
 
-    else if $type is 'primary'
+  else if 'pill' in $flags
+    padding-right 0.6em
+    padding-left 0.6em
+    border-radius 10rem
+
+  else if 'primary' in $flags
+    color $white
+    background-color $primary
+    &[href]:focus
+    &[href]:hover
       color $white
-      background-color $primary
-      &[href]:focus
-      &[href]:hover
-        color $white
-        text-decoration none
-        background-color $primaryHov
+      text-decoration none
+      background-color $primaryHov
 
-    else if $type is 'secondary'
+  else if 'secondary' in $flags
+    color $white
+    background-color $secondary
+    &[href]:focus
+    &[href]:hover
       color $white
-      background-color $secondary
-      &[href]:focus
-      &[href]:hover
-        color $white
-        text-decoration none
-        background-color $secondaryHov
+      text-decoration none
+      background-color $secondaryHov
 
-    else if $type is 'success'
+  else if 'success' in $flags
+    color $white
+    background-color $success
+    &[href]:focus
+    &[href]:hover
       color $white
-      background-color $success
-      &[href]:focus
-      &[href]:hover
-        color $white
-        text-decoration none
-        background-color $successHov
+      text-decoration none
+      background-color $successHov
 
-    else if $type is 'info'
+  else if 'info' in $flags
+    color $white
+    background-color $info
+    &[href]:focus
+    &[href]:hover
       color $white
-      background-color $info
-      &[href]:focus
-      &[href]:hover
-        color $white
-        text-decoration none
-        background-color $infoHov
+      text-decoration none
+      background-color $infoHov
 
-    else if $type is 'warning'
+  else if 'warning' in $flags
+    color #111
+    background-color $warning
+    &[href]:focus
+    &[href]:hover
       color #111
-      background-color $warning
-      &[href]:focus
-      &[href]:hover
-        color #111
-        text-decoration none
-        background-color $warningHov
+      text-decoration none
+      background-color $warningHov
 
-    else if $type is 'danger'
+  else if 'danger' in $flags
+    color $white
+    background-color $danger
+    &[href]:focus
+    &[href]:hover
       color $white
-      background-color $danger
-      &[href]:focus
-      &[href]:hover
-        color $white
-        text-decoration none
-        background-color $dangerHov
+      text-decoration none
+      background-color $dangerHov
 
-    else if $type is 'light'
+  else if 'light' in $flags
+    color #111
+    background-color $light
+    &[href]:focus
+    &[href]:hover
       color #111
-      background-color $light
-      &[href]:focus
-      &[href]:hover
-        color #111
-        text-decoration none
-        background-color $lightHov
+      text-decoration none
+      background-color $lightHov
 
-    else if $type is 'dark'
+  else if 'dark' in $flags
+    color $white
+    background-color $dark
+    &[href]:focus
+    &[href]:hover
       color $white
-      background-color $dark
-      &[href]:focus
-      &[href]:hover
-        color $white
-        text-decoration none
-        background-color $darkHov
-    else if $type is a 'rgba'
-      color: invert($type)
-      background-color: $type
-      &[href]:focus
-      &[href]:hover
-        background-color: highlight($type)
+      text-decoration none
+      background-color $darkHov
+  else if $type is a 'rgba'
+    color: invert($type)
+    background-color: $type
+    &[href]:focus
+    &[href]:hover
+      background-color: highlight($type)
