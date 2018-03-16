@@ -20,57 +20,57 @@ border()
   if length($locations) > 0
     for $location in $locations
       if $size is 0
-        parse($location, ': 0 !important;', 'border-')
+        parse($location, ': 0;', 'border-')
       else
         parse($location, ':', 'border-') parse($size) parse($type) parse($color)
   else
     if $size is 0
-      border: 0 !important
+      border: 0
     else
-      border: $size $type $color !important
+      border: $size $type $color
 
 
   // set-border()
-  // /*  border 1px solid #e9ecef !important */
+  // /*  border 1px solid #e9ecef */
 
   // set-border(0)
-  // /*  border 0 !important */
+  // /*  border 0 */
 
   // set-border(top 0)
-  // /*  border-top 0 !important */
+  // /*  border-top 0 */
 
   // set-border(right 0)
-  // /*  border-right 0 !important */
+  // /*  border-right 0 */
 
   // set-border(bottom 0)
-  // /*  border-bottom 0 !important */
+  // /*  border-bottom 0 */
 
   // set-border(left 0)
-  // /*  border-left 0 !important */
+  // /*  border-left 0 */
 
   // set-border(primary)
-  // /*  border-color $primary !important */
+  // /*  border-color $primary */
 
   // set-border(secondary)
-  // /*  border-color $secondary !important */
+  // /*  border-color $secondary */
 
   // set-border(success)
-  // /*  border-color $success !important */
+  // /*  border-color $success */
 
   // set-border(info)
-  // /*  border-color $info !important */
+  // /*  border-color $info */
 
   // set-border(warning)
-  // /*  border-color $warning !important */
+  // /*  border-color $warning */
 
   // set-border(danger)
-  // /*  border-color $danger !important */
+  // /*  border-color $danger */
 
   // set-border(light)
-  // /*  border-color $light !important */
+  // /*  border-color $light */
 
   // set-border(dark)
-  // /*  border-color $dark !important */
+  // /*  border-color $dark */
 
   // set-border('white') // note the quotes!
-  // /*  border-color $white !important */
+  // /*  border-color $white */

@@ -1,11 +1,11 @@
-alert($type = null, $close = '.close', $link = '.link')
+alert($type = null, $closeClass = 'close', $linkClass = 'link')
   padding 0.75rem 1.25rem
   margin-bottom 1rem
   border 1px solid transparent
   border-radius 0.25rem
-  {$link}
+  &.{linkClass}
     font-weight $font-weight-bold
-  {$close}
+  &.{$closeClass}
     position relative
     top -0.75rem
     right -1.25rem
@@ -21,7 +21,7 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #b8daff
     hr
       border-top-color #9fcdff
-    {$link}
+    &.{$linkClass}
       color #002752
   if $type is 'secondary'
     color #464a4e
@@ -29,7 +29,7 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #dddfe2
     hr
       border-top-color #cfd2d6
-    {$link}
+    &.{$linkClass}
       color #2e3133
   if $type is 'success'
     color #155724
@@ -37,7 +37,7 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #c3e6cb
     hr
       border-top-color #b1dfbb
-    {$link}
+    &.{linkClass}
       color #0b2e13
   if $type is 'info'
     color #0c5460
@@ -45,7 +45,7 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #bee5eb
     hr
       border-top-color #abdde5
-    {$link}
+    &.{linkClass}
       color #062c33
   if $type is 'warning'
     color #856404
@@ -53,7 +53,7 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #ffeeba
     hr
       border-top-color #ffe8a1
-    {$link}
+    &.{linkClass}
       color #533f03
   if $type is 'danger'
     color #721c24
@@ -61,7 +61,7 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #f5c6cb
     hr
       border-top-color #f1b0b7
-    {$link}
+    &.{linkClass}
       color #491217
   if $type is 'light'
     color #818182
@@ -69,7 +69,7 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #fdfdfe
     hr
       border-top-color #ececf6
-    {$link}
+    &.{linkClass}
       color #686868
   if $type is 'dark'
     color #1b1e21
@@ -77,5 +77,5 @@ alert($type = null, $close = '.close', $link = '.link')
     border-color #c6c8ca
     hr
       border-top-color #b9bbbe
-    {$link}
+    &.{linkClass}
       color #040505
