@@ -1,34 +1,17 @@
 btn()
   // PARSE ARGUMENTS
-  $flags = ()
+  $flags = getFlags(arguments)
   // get the name of this class
-  $this = split(' ', unquote(selector()))[-1]
+  $this = getThis()
 
   // set default classes
-  $focusClass := 'focus'
-  $disabledClass := 'disabled'
-  $activeClass := 'active'
-  $showClass := 'show'
-  $toggleClass := 'toggle'
-
-  if arguments is a 'object'
-    // get classnames
-    $focusClass = arguments.focusClass or $focusClass
-    $disabledClass = arguments.disabledClass or $disabledClass
-    $activeClass = arguments.activeClass or $activeClass
-    $showClass = arguments.showClass or $showClass
-    $toggleClass = arguments.toggleClass or $toggleClass
-  else
-    for $value in arguments
-      if $value is a 'object'
-        $focusClass = $value.focusClass or $focusClass
-        $disabledClass = $value.disabledClass or $disabledClass
-        $activeClass = $value.activeClass or $activeClass
-        $showClass = $value.showClass or $showClass
-        $toggleClass = $value.toggleClass or $toggleClass
-      else
-        push($flags, $value)
+  $focusClass := getHash(arguments, 'focusClass', 'focus')
+  $disabledClass := getHash(arguments, 'disabledClass', 'disabled')
+  $activeClass := getHash(arguments, 'activeClass', 'active')
+  $showClass := getHash(arguments, 'showClass', 'show')
+  $toggleClass := getHash(arguments, 'toggleClass', 'toggle')
   // END ARGUMENT PARSE
+  content: $focusClass $disabledClass $activeClass $showClass $toggleClass
 
   if 'link' in $flags
     font-weight: $font-weight-normal
@@ -156,59 +139,52 @@ btn()
           &.{$showClass}
             display: table-row-group
 
-    for $value in $flags
-      $color = null
-      if $value in ('primary' 'secondary' 'success' 'info' 'warning' 'danger' 'light' 'dark')
-        $color = parse($value)
-        $shadow = parse($value, 'Shadow')
-        $hover = parse($value, 'Hov')
-        $btnHover = parse($value, 'BtnHov')
-      else if $value is a 'rgba'
-        $color = $value
-        $shadow = alpha($value, 0.5)
-        $hover = darken($value, 11%)
-        $btnHover = darken($value, 8%)
-      if $color
-        &:focus
-        &.{$focusClass}
-          box-shadow: 0 0 0 3px $shadow
-        if 'outline' in $flags
-          color: $color
-          background-color: transparent
-          background-image: none
-          border-color: $color
-          &:hover
-            color: blackorwhite($color)
-            background-color: $color
-            border-color: $color
-
-          &:disabled
-          &{$disabledClass}
-            color: $color
-            background-color: transparent
-
-          &:active
-          &.{$activeClass}
-          .{$showClass} > {$this}.{$toggleClass}
-            background-color: $color
-            color: whiteorblack($color)
-            border-color: $color
-
-        else // not outline
+    $colors = getColorSet(arguments)
+    $color = $colors.color
+    $shadow = $colors.shadow
+    $hover = $colors.hover
+    $btnHover = $colors.btnHover
+    if $color
+      &:focus
+      &.{$focusClass}
+        box-shadow: 0 0 0 3px $shadow
+      if 'outline' in $flags
+        color: $color
+        background-color: transparent
+        background-image: none
+        border-color: $color
+        &:hover
           color: blackorwhite($color)
           background-color: $color
           border-color: $color
-          &:hover
-            color: blackorwhite($color)
-            background-color: $btnHover
-            border-color: $hover
-          &:disabled
-          &{$disabledClass}
-            background-color: $color
-            border-color: $color
-          &:active
-          &.{$activeClass}
-          .{$showClass} > {$this}.{$toggleClass}
-            background-color: $btnHover
-            background-image: none
-            border-color: $hover
+
+        &:disabled
+        &{$disabledClass}
+          color: $color
+          background-color: transparent
+
+        &:active
+        &.{$activeClass}
+        .{$showClass} > {$this}.{$toggleClass}
+          background-color: $color
+          color: whiteorblack($color)
+          border-color: $color
+
+      else // not outline
+        color: blackorwhite($color)
+        background-color: $color
+        border-color: $color
+        &:hover
+          color: blackorwhite($color)
+          background-color: $btnHover
+          border-color: $hover
+        &:disabled
+        &{$disabledClass}
+          background-color: $color
+          border-color: $color
+        &:active
+        &.{$activeClass}
+        .{$showClass} > {$this}.{$toggleClass}
+          background-color: $btnHover
+          background-image: none
+          border-color: $hover

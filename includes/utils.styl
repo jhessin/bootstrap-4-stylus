@@ -35,10 +35,73 @@ blackorwhite($color, $black = black, $white = white)
       $white
 
 parse($value, $postfix = '', $prefix = '$')
-  $value = unquote($value)
-  $prefix = unquote($prefix)
-  $postfix = unquote($postfix)
-  convert(s('%s%s%s', $prefix, $value, $postfix))
+  if ($value is a 'string') or ($value is a 'ident')
+    $value = unquote($value)
+    $prefix = unquote($prefix)
+    $postfix = unquote($postfix)
+    convert(s('%s%s%s', $prefix, $value, $postfix))
+  else
+    null
+
+getThis()
+  return split(' ', unquote(selector()))[-1]
+
+getFlags()
+  // PARSE ARGUMENTS
+  $flags = ()
+  for $value in arguments
+    if $value is a 'string'
+      push($flags, unquote($value))
+    else if $value is a 'ident'
+      push($flags, $value)
+  $flags
+
+getColorSet()
+  $colors = {}
+  for $value in arguments
+    if $value is a 'rgba'
+      $colors.color = $value
+      $colors.shadow = alpha($value, 0.5)
+      $colors.hover = darken($value, 11%)
+      $colors.btnHover = darken($value, 8%)
+      return $colors
+    else
+      $parsed = parse($value)
+      if $parsed is a 'rgba'
+        $colors.color = $parsed
+        $parsed = parse($value, 'Shadow')
+        if $parsed is a 'rgba'
+          $colors.shadow = $parsed
+        else
+          $colors.shadow = alpha($colors.color, 0.5)
+        $parsed = parse($value, 'Hov')
+        if $parsed is a 'rgba'
+          $colors.hover = $parsed
+        else
+          $colors.hover = darken($colors.color, 11%)
+        $parsed = parse($value, 'BtnHov')
+        if $parsed is a 'rgba'
+          $colors.btnHover = $parsed
+        else
+          $colors.btnHover = darken($colors.color, 8%)
+        return $colors
+      else
+        return null
+
+getHash($args, $valueName, $defaultValue = null)
+  if $args is a 'object'
+    if $args[$valueName]
+      return $args[$valueName]
+    else
+      return $devaultValue
+  else if length($args) > 1
+    for $value in $args
+      if $value is a 'object'
+        if $value[$valueName]
+          return $value[$valueName]
+        else
+          return $defaultValue
+    return $defaultValue
 
 // A utility to discover what is being passed
 discover()
