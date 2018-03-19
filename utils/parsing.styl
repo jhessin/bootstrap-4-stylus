@@ -1,45 +1,3 @@
-// a helper to darken or lighten a color
-highlight($args...)
-  $color = @color
-  $percent = 50%
-  for $arg in $args
-    if $arg is a 'rgba'
-      $color = $arg
-    if ($arg is a 'unit') and (unit($arg) is '%')
-      $percent = $arg
-  if light($color)
-    darken($color, $percent)
-  else
-    lighten($color, $percent)
-
-compare($color1, $color2)
-  if ($color1 is a 'rgba') and ($color2 is a 'rgba')
-    // compare lightness
-    if lightness($color1) > lightness($color2)
-      $result = null
-      for num in (1%..100%)
-        if (not $result) and (lightness($color1) < lightness(lighten($color2, num)))
-          $result = s('color1 is %s lighter than color2', num)
-      p($result)
-    else if lightness($color1) < lightness($color2)
-      $result = null
-      for num in (1%..100%)
-        if (not $result) and (lightness(lighten($color1, num)) > lightness($color2))
-          $result = s('color2 is %s lighter than color1', num)
-      p($result)
-    else
-      p('colors are the same lightness')
-
-    // compare contrast ratio
-    p(s('The contrast ratio between the colors is %s', contrast($color1, $color2).ratio))
-
-blackorwhite($color, $black = black, $white = white)
-  if $color is a 'rgba'
-    if light($color)
-      $black
-    else
-      $white
-
 parse($value, $postfix = '', $prefix = '$')
   if ($value is a 'string') or ($value is a 'ident')
     $value = unquote($value)
@@ -121,26 +79,3 @@ getHash($args, $valueName, $defaultValue = null)
     return $defaultValue
   else
     return $defaultValue
-
-// A utility to discover what is being passed
-discover()
-  p(s('length(arguments) = %s', length(arguments)))
-  p(s('typeof(arguments) = %s', typeof(arguments)))
-  p(s('arguments = %s', arguments))
-  if length(arguments) > 1
-    for $key, $value in arguments
-      if typeof(arguments) isnt 'object'
-        p(s('arguments[%s] = %s', $value, $key))
-        p(s('typeof(arguments[%s]) = %s', $value, typeof($key)))
-        if length($key) > 1
-          {$value}
-            discover($key)
-      else
-        p(s('arguments["%s"] = %s', $key, $value))
-        p(s('typeof(arguments[%s]) = %s', $key, typeof($value)))
-        if length($value) > 1
-          {$key}
-            discover($value)
-
-gradientBg($color)
-  background: $color linear-gradient(180deg, mix(@background-color, $color, 15%), $color) repeat-x

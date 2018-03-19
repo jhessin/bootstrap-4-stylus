@@ -1,0 +1,21 @@
+discover()
+  p(s('arguments = %s', arguments))
+  p(s('length = %s', length(arguments)))
+  p(s('type = %s', typeof(arguments)))
+  if length(arguments) > 1
+    if arguments is a 'object'
+      for $key, $value in arguments
+        p(s('["%s"] = %s', $key, $value))
+        p(s('typeof([%s]) = %s', $key, typeof($value)))
+        if length($value) > 1
+          p(s('--discovery of [%s]--', $key))
+          discover($value)
+          p(s('--return from [%s]--', $key))
+    else
+      for $value, $i in arguments
+        p(s('[%s] = %s', $i, $value))
+        p(s('typeof([%s]) = %s', $i, typeof($value)))
+        if length($value) > 1
+          p(s('--discovery of [%s]--', $i))
+          discover($value)
+          p(s('--return from [%s]--', $i))
