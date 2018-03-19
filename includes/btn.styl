@@ -14,7 +14,8 @@ btn()
   $toggleClass := getHash(arguments, 'toggleClass', 'toggle')
   // END ARGUMENT PARSE
 
-  p($focusClass $disabledClass $activeClass $showClass $toggleClass)
+  if $DEBUGGING is defined
+    p($focusClass $disabledClass $activeClass $showClass $toggleClass)
 
   if 'link' in $flags
     font-weight: $font-weight-normal
@@ -106,6 +107,9 @@ btn()
       font-size 1.25rem
       line-height 1.5
       border-radius 0.3rem
+
+    if 'drop' in $flags
+      position: relative
 
     if 'sm' in $flags
       padding 0.25rem 0.5rem

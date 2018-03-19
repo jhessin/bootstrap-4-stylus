@@ -104,6 +104,8 @@ getColorSet()
         return null
 
 getHash($args, $valueName, $defaultValue = null)
+  if $DEBUGGING is defined
+    p('getHash: ', $args, $valueName, $defaultValue)
   if $args is a 'object'
     if $args[$valueName]
       return $args[$valueName]
@@ -116,6 +118,8 @@ getHash($args, $valueName, $defaultValue = null)
           return $value[$valueName]
         else
           return $defaultValue
+    return $defaultValue
+  else
     return $defaultValue
 
 // A utility to discover what is being passed
@@ -137,3 +141,6 @@ discover()
         if length($value) > 1
           {$key}
             discover($value)
+
+gradientBg($color)
+  background: $color linear-gradient(180deg, mix(@background-color, $color, 15%), $color) repeat-x
