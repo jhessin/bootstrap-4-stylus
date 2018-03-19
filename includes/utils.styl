@@ -14,18 +14,24 @@ highlight($args...)
 
 compare($color1, $color2)
   if ($color1 is a 'rgba') and ($color2 is a 'rgba')
+    // compare lightness
     if lightness($color1) > lightness($color2)
       $result = null
       for num in (1%..100%)
         if (not $result) and (lightness($color1) < lightness(lighten($color2, num)))
           $result = s('color1 is %s lighter than color2', num)
-      content: $result
+      p($result)
     else if lightness($color1) < lightness($color2)
       $result = null
       for num in (1%..100%)
         if (not $result) and (lightness(lighten($color1, num)) > lightness($color2))
           $result = s('color2 is %s lighter than color1', num)
-      content: $result
+      p($result)
+    else
+      p('colors are the same lightness')
+
+    // compare contrast ratio
+    p(s('The contrast ratio between the colors is %s', contrast($color1, $color2).ratio))
 
 blackorwhite($color, $black = black, $white = white)
   if $color is a 'rgba'
@@ -58,12 +64,20 @@ getFlags()
 
 getColorSet()
   $colors = {}
+
+  addTweaks($value)
+    // Other color tweaks
+    $colors.grayscale = grayscale($value)
+    $colors.bw = blackorwhite($value)
+    $colors.complement = complement($value)
+
   for $value in arguments
     if $value is a 'rgba'
       $colors.color = $value
       $colors.shadow = alpha($value, 0.5)
       $colors.hover = darken($value, 11%)
       $colors.btnHover = darken($value, 8%)
+      addTweaks($value)
       return $colors
     else
       $parsed = parse($value)
@@ -84,6 +98,7 @@ getColorSet()
           $colors.btnHover = $parsed
         else
           $colors.btnHover = darken($colors.color, 8%)
+        addTweaks($colors.color)
         return $colors
       else
         return null
@@ -105,20 +120,20 @@ getHash($args, $valueName, $defaultValue = null)
 
 // A utility to discover what is being passed
 discover()
-  content: s('length(arguments) = %s', length(arguments))
-  content: s('typeof(arguments) = %s', typeof(arguments))
-  content: s('arguments = %s', arguments)
+  p(s('length(arguments) = %s', length(arguments)))
+  p(s('typeof(arguments) = %s', typeof(arguments)))
+  p(s('arguments = %s', arguments))
   if length(arguments) > 1
     for $key, $value in arguments
       if typeof(arguments) isnt 'object'
-        content: s('arguments[%s] = %s', $value, $key)
-        content: s('typeof(arguments[%s]) = %s', $value, typeof($key))
+        p(s('arguments[%s] = %s', $value, $key))
+        p(s('typeof(arguments[%s]) = %s', $value, typeof($key)))
         if length($key) > 1
           {$value}
             discover($key)
       else
-        content: s('arguments["%s"] = %s', $key, $value)
-        content: s('typeof(arguments[%s]) = %s', $key, typeof($value))
+        p(s('arguments["%s"] = %s', $key, $value))
+        p(s('typeof(arguments[%s]) = %s', $key, typeof($value)))
         if length($value) > 1
           {$key}
             discover($value)

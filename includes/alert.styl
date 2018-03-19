@@ -1,27 +1,17 @@
 alert()
   // PARSE ARGUMENTS
-  $flags = ()
+  $flags = getFlags(arguments)
   // get the name of this class
-  $this = split(' ', unquote(selector()))[-1]
+  $this = getThis()
+  // get the colors for this alert
+  $colors = getColorSet(arguments)
 
   // set default classes
-  $closeClass := 'close'
-  $showClass := 'show'
-
-  if arguments is a 'object'
-    // get classnames
-    $closeClass = arguments.closeClass or $closeClass
-    $showClass = arguments.showClass or $showClass
-  else
-    for $value in arguments
-      if $value is a 'object'
-        $closeClass = $value.closeClass or $closeClass
-        $showClass = $value.showClass or $showClass
-      else
-        push($flags, $value)
+  $closeClass := getHash(arguments, 'closeClass', 'close')
+  $showClass := getHash(arguments, 'showClass', 'show')
   // END ARGUMENT PARSE
   // DEBUGGING
-  content: $flags
+  p($flags)
 
   padding 0.75rem 1.25rem
   margin-bottom 1rem
@@ -107,3 +97,7 @@ alert()
       border-top-color #b9bbbe
     [href]
       color #040505
+  // else if $colors
+  //   color: $colors.color
+  //   background-color: $colors.complement
+  //   border-color: $colors.hover

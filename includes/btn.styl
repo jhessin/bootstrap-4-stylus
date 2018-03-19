@@ -3,6 +3,8 @@ btn()
   $flags = getFlags(arguments)
   // get the name of this class
   $this = getThis()
+  // get the colors for this button
+  $colors = getColorSet(arguments)
 
   // set default classes
   $focusClass := getHash(arguments, 'focusClass', 'focus')
@@ -11,7 +13,8 @@ btn()
   $showClass := getHash(arguments, 'showClass', 'show')
   $toggleClass := getHash(arguments, 'toggleClass', 'toggle')
   // END ARGUMENT PARSE
-  content: $focusClass $disabledClass $activeClass $showClass $toggleClass
+
+  p($focusClass $disabledClass $activeClass $showClass $toggleClass)
 
   if 'link' in $flags
     font-weight: $font-weight-normal
@@ -139,22 +142,18 @@ btn()
           &.{$showClass}
             display: table-row-group
 
-    $colors = getColorSet(arguments)
     $color = $colors.color
-    $shadow = $colors.shadow
-    $hover = $colors.hover
-    $btnHover = $colors.btnHover
-    if $color
+    if $colors
       &:focus
       &.{$focusClass}
-        box-shadow: 0 0 0 3px $shadow
+        box-shadow: 0 0 0 3px $colors.shadow
       if 'outline' in $flags
         color: $color
         background-color: transparent
         background-image: none
         border-color: $color
         &:hover
-          color: blackorwhite($color)
+          color: $colors.bw
           background-color: $color
           border-color: $color
 
@@ -171,13 +170,13 @@ btn()
           border-color: $color
 
       else // not outline
-        color: blackorwhite($color)
+        color: $colors.bw
         background-color: $color
         border-color: $color
         &:hover
-          color: blackorwhite($color)
-          background-color: $btnHover
-          border-color: $hover
+          color: $colors.bw
+          background-color: $colors.btnHover
+          border-color: $colors.hover
         &:disabled
         &{$disabledClass}
           background-color: $color
@@ -185,6 +184,6 @@ btn()
         &:active
         &.{$activeClass}
         .{$showClass} > {$this}.{$toggleClass}
-          background-color: $btnHover
+          background-color: $colors.btnHover
           background-image: none
-          border-color: $hover
+          border-color: $colors.hover
